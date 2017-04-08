@@ -1,0 +1,56 @@
+// Defaults
+html {
+  min-height: 100vh;
+}
+
+body {
+  background-color: #EBEBEB;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-family: 'Merriweather', serif;
+}
+h2 {
+  font-family: 'Merriweather', serif;
+}
+h3 {
+  font-family: 'Merriweather', serif;
+}
+h4 {
+  font-family: 'Merriweather', serif;
+}
+h5 {
+  font-family: 'Merriweather', serif;
+}
+h6 {
+  font-family: 'Merriweather', serif;
+}
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+// Themes
+.main-red {
+  color: #F04242;
+}
+
+.main-red-bg {
+  background-color: #F04242;
+}
+
+.main-grey {
+  color: #545454;
+}
+
+.main-grey-bg {
+  background-color: #545454;
+}
+
+.main-blue {
+  color: #CBEBEE;
+}
+
+.main-blue-bg{
+  background-color: #CBEBEE;
+}

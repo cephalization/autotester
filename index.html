@@ -2,13 +2,26 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="1066733352092-ctl742vq5g703nlugmvhugfdrfo1egr8.apps.googleusercontent.com">
     <title>AutoTester</title>
-    <link rel="stylesheet" href="/css/master.css">
-    <script type="text/javascript" src="/js/angular.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/master.css" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
   </head>
   <body>
-    <div class="jumbotron">
+    <div class="jumbotron main-red-bg text-center">
       <h1>AutoTester</h1>
+      <p>A test taking website for students and their instructors</p>
+    </div>
+    <div class="container text-center">
+      <p class="lead">To get started, sign in with your MTU ISO login</p>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
   </body>
 </html>
