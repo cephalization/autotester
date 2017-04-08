@@ -39,6 +39,18 @@ g-signin2 {
   margin: 0 auto;
 }
 
+.navbar-custom {
+  background-color: #F04242;
+  border-color: #F04242;
+  border-radius: 0;
+  border: 0;
+  color: #545454;
+}
+
+.navbar-custom .navbar-brand .glyphicon {
+  color: #FFFFFF;
+}
+
 // Themes
 .main-red {
   color: #F04242;
