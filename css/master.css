@@ -1,77 +1,95 @@
 // Defaults
 html {
-  min-height: 100vh;
+    min-height: 100vh;
+    min-width: 350px;
 }
 
 body {
-  background-color: #EBEBEB;
-  font-family: 'Open Sans', sans-serif;
+    background-color: #EBEBEB;
+    font-family: 'Open Sans', sans-serif;
+    min-width: 350px;
 }
 
 h1 {
-  font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', serif;
 }
 h2 {
-  font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', serif;
 }
 h3 {
-  font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', serif;
 }
 h4 {
-  font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', serif;
 }
 h5 {
-  font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', serif;
 }
 h6 {
-  font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', serif;
 }
 p {
-  font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 // Overrides
 g-signin2 {
-  width: 100%;
+    width: 100%;
 }
 
 .g-signin2 > div{
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 .navbar-custom {
-  background-color: #F04242;
-  border-color: #F04242;
-  border-radius: 0;
-  border: 0;
-  color: #545454;
+    background-color: #F04242;
+    border-color: #F04242;
+    border-radius: 0;
+    border: 0;
+    color: #FFFFFF;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color: #FFFFFF;
 }
 
 .navbar-custom .navbar-brand .glyphicon {
-  color: #FFFFFF;
+    color: #FFFFFF;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: #FFFFFF;
+}
+
+.navbar-custom .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: inherit;
+}
+
+.jumbotron {
+    color: #FFFFFF;
 }
 
 // Themes
 .main-red {
-  color: #F04242;
+    color: #F04242;
 }
 
 .main-red-bg {
-  background-color: #F04242;
+    background-color: #F04242;
 }
 
 .main-grey {
-  color: #545454;
+    color: #545454;
 }
 
 .main-grey-bg {
-  background-color: #545454;
+    background-color: #545454;
 }
 
 .main-blue {
-  color: #CBEBEE;
+    color: #CBEBEE;
 }
 
 .main-blue-bg{
-  background-color: #CBEBEE;
+    background-color: #CBEBEE;
 }

@@ -1,12 +1,22 @@
-<nav class="navbar navbar-custom">
+<nav class="navbar navbar-default navbar-custom">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="dashboard">
         <span class="glyphicon glyphicon-list-alt main-grey"></span>
       </a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+        data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" onclick="signOut();">Sign out</a></li>
-    </ul>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id="curr-user" href="#">User</a></li>
+        <li><a href="#" onclick="signOut();">Sign out</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
