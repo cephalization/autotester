@@ -7,8 +7,9 @@ function onSignIn(googleUser) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            console.log(this.response);
             var response = JSON.parse(this.response);
-            if (response.success) {
+            if (response.success && response.exists) {
                 window.location.href = 'dashboard';
             } else {
                 alert(response.message);
@@ -17,7 +18,7 @@ function onSignIn(googleUser) {
         }
     }
     request.open('POST', 'php/checkSignIn.php', true);
-    request.send('email='+email);
+    request.send(JSON.stringify({email:email}));
 }
 
 function signOut() {
@@ -111,7 +112,8 @@ mainApp.controller("mainCtrl", function($scope, $http){
             $scope.loadingExams = false;
             console.log(response);
             if (response.data.Success) {
-                $scope.exams = response.data.exams;
+                console.log(response.data.Exams);
+                $scope.exams = response.data.Exams;
             }
         });
 });

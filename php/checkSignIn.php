@@ -2,17 +2,19 @@
 include './dbAccess.php';
 
 $response = new StdClass;
-if (isset($_POST['email'])) {
+$post = json_decode(file_get_contents('php://input'), true);
+if (isset($post['email'])) {
     $connection = new dbConnection();
     $connected = $connection->connectDB();
     if ($connected) {
         $query = $connection->PrepareStatement('Select * from Student where email = ?');
-        $query->bindParam(1, $_POST['email']);
+        $query->bindParam(1, $post['email']);
         $query->execute();
         $results = $query->fetchAll();
 
         if (count($results) !== 1) {
             $response->exists = false;
+            $response->message = 'User is not authorized by the instructor to use this service!';
         } else {
             $response->exists = true;
         }
@@ -23,8 +25,9 @@ if (isset($_POST['email'])) {
     }
 } else {
     $response->success = false;
-    $response->message = 'You are not an authorized student!';
+    $response->message = 'No email provided in POST request!';
 }
 $package = json_encode($response);
+header('Content-Type: application/json');
 echo $package;
 ?>

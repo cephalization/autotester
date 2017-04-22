@@ -11,6 +11,7 @@ if ($connected) {
     $allExams->Success = true;
     $query = $connection->PrepareStatement("Select * from Exam");
     $query->execute();
+    $query->setFetchMode(PDO::FETCH_ASSOC);
     $allExams->Exams = $query->FetchAll();
 } else {
     $allExams->Success = false;
@@ -19,5 +20,6 @@ if ($connected) {
 
 // Send the package to the front end
 $package = json_encode($allExams);
+header('Content-Type: application/json');
 echo $package;
 ?>
