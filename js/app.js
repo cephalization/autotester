@@ -1,11 +1,23 @@
 // Google gapi functionality
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    window.location.href = 'dashboard';
+    var email = profile.getEmail();
+
+    // Reject the user if they are not a student in the database
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(this.response);
+            if (response.success) {
+                window.location.href = 'dashboard';
+            } else {
+                alert(response.message);
+                signOut();
+            }
+        }
+    }
+    request.open('POST', 'php/checkSignIn.php', true);
+    request.send('email='+email);
 }
 
 function signOut() {
@@ -37,7 +49,8 @@ var initSigninV2 = function() {
     });
 
     // Listen for sign-in state changes.
-        auth2.isSignedIn.listen(signinChanged);
+    console.log('the user is signed in:', auth2.isSignedIn.get());
+    auth2.isSignedIn.listen(signinChanged);
 
     // Listen for changes to current user.
     auth2.currentUser.listen(userChanged);
@@ -46,7 +59,12 @@ var initSigninV2 = function() {
     if (auth2.isSignedIn.get() == true) {
         auth2.signIn();
     }
-
+    // else {
+    //  if (window.location.pathname.split('/')[2] != 'index') {
+    //     window.location.href = 'index';
+    // }
+    //}
+    //
     // Start with the current live values.
     refreshValues();
 };
@@ -58,9 +76,6 @@ var initSigninV2 = function() {
  */
 var signinChanged = function (val) {
     console.log('Signin state changed to ', val);
-    if (!val) {
-        window.location.href='index';
-    }
 };
 
 /**
@@ -81,15 +96,22 @@ var userChanged = function (user) {
 var refreshValues = function() {
     if (auth2){
         console.log('Refreshing values...');
-
-        googleUser = auth2.currentUser.get();
-
-        console.log(JSON.stringify(googleUser, undefined, 2));
+        if (googleUser != null && googleUser.isSignedIn()) {
+            console.log(JSON.stringify(googleUser, undefined, 2));
+        }
     }
 }
 
 // Angular declarations
 var mainApp = angular.module("mainApp", []);
-mainApp.controller("mainCtrl", function($scope){
-    $scope.test = "This signifies that angular is working!";
+mainApp.controller("mainCtrl", function($scope, $http){
+    $scope.loadingExams = true;
+    $http.get("php/retrieveExams.php")
+        .then(function(response){
+            $scope.loadingExams = false;
+            console.log(response);
+            if (response.data.Success) {
+                $scope.exams = response.data.exams;
+            }
+        });
 });

@@ -21,11 +21,17 @@
       <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h1>Dashboard</h1>
+            <h1>Available Exams</h1>
           </div>
           <div class="panel-body">
-            <p class="lead">Access exams you've taken and take some more!</p>
-            {{test}}
+            <div ng-show="loadingExams" class="text-center">
+              <p class="lead">Loading Exams...</p>
+            </div>
+            <div ng-hide="loadingExams">
+              <div ng-repeat="exam in exams">
+                {{exam.name}}
+              </div>
+            </div>
           </div>
         </div>
       </div>
