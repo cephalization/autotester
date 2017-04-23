@@ -166,4 +166,14 @@ mainApp.controller("mainCtrl", function($scope, $http, $cookies){
                 $scope.loadingExamResults = false;
             })
     }
+
+    $scope.getResults = function(exam) {
+        if ($scope.examResults[exam]) {
+            return parseFloat($scope.examResults[exam]);
+        } else {return false;}
+    }
+
+    $scope.didPass = function(score) {
+        return score >= 70;
+    }
 });
