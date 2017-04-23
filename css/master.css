@@ -1,13 +1,13 @@
-// Defaults
+/* Defaults */
 html {
     min-height: 100vh;
-    min-width: 350px;
+    min-width: 390px;
 }
 
 body {
     background-color: #EBEBEB;
     font-family: 'Open Sans', sans-serif;
-    min-width: 350px;
+    min-width: 390px;
 }
 
 h1 {
@@ -32,7 +32,7 @@ p {
     font-family: 'Open Sans', sans-serif;
 }
 
-// Overrides
+/* Overrides */
 g-signin2 {
     width: 100%;
 }
@@ -69,7 +69,32 @@ g-signin2 {
     color: #FFFFFF;
 }
 
-// Themes
+/* Custom Content */
+.test-panel-left {
+    border-radius: 5px 0 0 5px;
+    color: #FFFFFF;
+    background-color: #545454;
+    margin-bottom: 5px;
+}
+
+.test-panel-pass {
+    background-color: #5CB85C;
+}
+
+.test-panel-fail {
+    background-color: #D9534F;
+}
+
+.test-panel-take {
+    background-color: #428BCA;
+}
+
+.test-panel-right {
+    border-radius: 0 5px 5px 0;
+    color: #FFFFFF;
+}
+
+/* Themes */
 .main-red {
     color: #F04242;
 }

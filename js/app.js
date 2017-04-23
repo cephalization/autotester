@@ -10,6 +10,11 @@ function onSignIn(googleUser) {
             console.log(this.response);
             var response = JSON.parse(this.response);
             if (response.success && response.exists) {
+                // Create a cookie for the user
+                // Create the expiration date of 10 days
+                var date = new Date();
+                date.setTime(date.getTime() + (10*24*60*60*1000));
+                document.cookie = "username="+email+";expires="+date.toUTCString()+";path=/;";
                 window.location.href = 'dashboard';
             } else {
                 alert(response.message);
@@ -25,6 +30,9 @@ function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('user signed out');
+        var d = new Date();
+        d = d.toUTCString();
+        document.cookie = "username=;expires="+d+";path=/;";
         window.location.href = 'index';
     });
 }
