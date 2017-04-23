@@ -113,15 +113,37 @@ var refreshValues = function() {
 
 // Angular declarations
 var mainApp = angular.module("mainApp", []);
-mainApp.controller("mainCtrl", function($scope, $http){
+mainApp.controller("mainCtrl", function($scope, $http, $cookies){
+    // Load user information from cookie to make user-specific requests
+    // Then load the student ID from the database
+    var username = $cookies.get('username');
+
     $scope.loadingExams = true;
     $http.get("php/retrieveExams.php")
         .then(function(response){
-            $scope.loadingExams = false;
             console.log(response);
             if (response.data.Success) {
                 console.log(response.data.Exams);
                 $scope.exams = response.data.Exams;
             }
+            $scope.loadingExams = false;
         });
+
+    $scope.loadingStudent = true;
+    $http.post('php/retrieveStudent.php', {username:username})
+        .then(function(response){
+            console.log(response);
+
+            $scope.loadingStudent = false;
+        });
+
+    $scope.loadingExamResults = true;
+    var loadExamResults = function(studentID) {
+        $http.post('php/examResults.php', {ID:studentID})
+            .then(function(response){
+                console.log(response);
+
+                $scope.loadingExamResults = false;
+            })
+    }
 });
