@@ -145,10 +145,23 @@ mainApp.controller("mainCtrl", function($scope, $http, $cookies){
         });
 
     $scope.loadingExamResults = true;
+    $scope.examResults = {};
     function loadExamResults (studentID) {
         $http.post('php/examResults.php', {ID:studentID})
             .then(function(response){
                 console.log('examResults:',response);
+
+                if (response.data.success) {
+                  // Create object properties for each exam result
+                  for (var i = 0; i < response.data.results.length; i++) {
+                    Object.defineProperty($scope.examResults, response.data.results[i].Exam_name,{
+                      enumerable: true,
+                      writable: true,
+                      configureable: true,
+                      value: response.data.results[i].points
+                    });
+                  }
+                }
 
                 $scope.loadingExamResults = false;
             })

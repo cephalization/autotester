@@ -36,8 +36,15 @@
                       <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10 test-panel-left">
                         <h5>{{exam.name}}</h5>
                       </div>
-                      <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 test-panel-right test-panel-pass">
-                        <h5>100/100</h5>
+                      <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 test-panel-right">
+                        <!-- Place user's score or a button to take the exam -->
+                        <div ng-if="examResults[exam]"
+                            ng-class="{'test-panel-pass':examResults[exam] > 69, 'test-panel-pass':examResults[exam] < 70}">
+                          <h5>{{examResults[exam]}}</h5>
+                        </div>
+                        <div ng-if="!examResults[exam]">
+                          <button type="button" name="takeExam" class="btn btn-primary btn-block">Take</button>
+                        </div>
                       </div>
                     </div>
                   </div>
