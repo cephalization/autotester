@@ -37,6 +37,7 @@ function signOut() {
     });
 }
 
+window.googleSignOut = signOut;
 
 var auth2; // The Sign-In object.
 var googleUser; // The current user.
@@ -112,7 +113,7 @@ var refreshValues = function() {
 }
 
 // Angular declarations
-var mainApp = angular.module("mainApp", []);
+var mainApp = angular.module("mainApp", ['ngCookies']);
 mainApp.controller("mainCtrl", function($scope, $http, $cookies){
     // Load user information from cookie to make user-specific requests
     // Then load the student ID from the database
@@ -133,15 +134,21 @@ mainApp.controller("mainCtrl", function($scope, $http, $cookies){
     $http.post('php/retrieveStudent.php', {username:username})
         .then(function(response){
             console.log('retrieveStudent:', response);
-
-            $scope.loadingStudent = false;
+            if (response.data.success && response.data.student != null) {
+                $scope.student = response.data.student;
+                $scope.loadingStudent = false;
+                loadExamResults($scope.student.student_id);
+            } else {
+                alert(response.data.message);
+                window.googleSignOut();
+            }
         });
 
     $scope.loadingExamResults = true;
-    var loadExamResults = function(studentID) {
+    function loadExamResults (studentID) {
         $http.post('php/examResults.php', {ID:studentID})
             .then(function(response){
-                console.log(response);
+                console.log('examResults:',response);
 
                 $scope.loadingExamResults = false;
             })
