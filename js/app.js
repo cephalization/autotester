@@ -121,9 +121,9 @@ mainApp.controller("mainCtrl", function($scope, $http, $cookies){
     $scope.loadingExams = true;
     $http.get("php/retrieveExams.php")
         .then(function(response){
-            console.log(response);
+            console.log('retrieveExams:',response);
             if (response.data.Success) {
-                console.log(response.data.Exams);
+                console.log('retrieveExams, exams:',response.data.Exams);
                 $scope.exams = response.data.Exams;
             }
             $scope.loadingExams = false;
@@ -132,7 +132,7 @@ mainApp.controller("mainCtrl", function($scope, $http, $cookies){
     $scope.loadingStudent = true;
     $http.post('php/retrieveStudent.php', {username:username})
         .then(function(response){
-            console.log(response);
+            console.log('retrieveStudent:', response);
 
             $scope.loadingStudent = false;
         });
