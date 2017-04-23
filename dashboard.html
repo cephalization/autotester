@@ -25,10 +25,10 @@
             <h1>Available Exams</h1>
           </div>
           <div class="panel-body" style="margin-left: 5px; margin-right: 5px">
-            <div ng-show="loadingExams" class="text-center">
+            <div ng-show="loadingExams || loadingStudent || loadingExamResults" class="text-center">
               <p class="lead">Loading Exams...</p>
             </div>
-            <div ng-hide="loadingExams">
+            <div ng-if="!loadingExams && !loadingExamResults && !loadingStudent">
               <div ng-repeat="exam in exams">
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-12 col-lg-offset-0">
