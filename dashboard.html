@@ -38,12 +38,12 @@
                         <h5>{{exam.name}}</h5>
                       </div>
                       <!-- Place user's score or a button to take the exam -->
-                      <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 test-panel-right"
+                      <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 test-panel-right text-center"
                           ng-if="getResults(exam.name)"
-                          ng-class="{'test-panel-pass':didPass(getResults(exam.name)), 'test-panel-pass':didPass(getResults(exam.name))}">
-                          <h5>{{examResults[exam.name]}}</h5>
+                          ng-class="{'test-panel-pass':didPass(getResults(exam.name)), 'test-panel-fail':!didPass(getResults(exam.name))}">
+                          <h5>{{examResults[exam.name]}}%</h5>
                       </div>
-                      <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 test-panel-right" ng-if="!getResults(exam.name)">
+                      <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 test-panel-right test-panel-take" ng-if="!getResults(exam.name)">
                           <button type="button" name="takeExam" class="btn btn-primary btn-block">Take</button>
                       </div>
                     </div>
