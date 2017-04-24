@@ -1,4 +1,4 @@
-mainApp.controller("mainCtrl", function($scope, $http, $cookies){
+mainApp.controller("dashboardCtrl", function($scope, $http, $cookies){
     // Load user information from cookie to make user-specific requests
     // Then load the student ID from the database
     var username = $cookies.get('username');
