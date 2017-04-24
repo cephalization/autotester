@@ -38,11 +38,20 @@ mainApp.controller("dashboardCtrl", function($scope, $http, $cookies){
                 if (response.data.success) {
                   // Create object properties for each exam result
                   for (var i = 0; i < response.data.results.length; i++) {
+
+                    var total = 0;
+                    for (var i = 0; i < $scope.exams.length; i++) {
+                        if ($scope.exams[i].name === response.data.results[i].Exam_name) {
+                            total = $scope.exams[i].points;
+                            total = parseFloat(total);
+                            break;
+                        }
+                    }
                     Object.defineProperty($scope.examResults, response.data.results[i].Exam_name,{
-                      enumerable: true,
-                      writable: true,
-                      configureable: true,
-                      value: response.data.results[i].points
+                        enumerable: true,
+                        writable: true,
+                        configureable: true,
+                        value: (parseFloat(response.data.results[i].points) / total * 100)
                     });
                   }
                 }
@@ -53,7 +62,7 @@ mainApp.controller("dashboardCtrl", function($scope, $http, $cookies){
 
     $scope.getResults = function(exam) {
         if ($scope.examResults[exam]) {
-            return parseFloat($scope.examResults[exam]);
+            return $scope.examResults[exam];
         } else {return false;}
     }
 
