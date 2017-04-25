@@ -1,9 +1,11 @@
 mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
     var exam = {};
-    if (!examService.get().initialized) {
+    var studentID = null;
+    if (!examService.get().initialized || !window.sessionStorage.getItem('student')) {
         window.location.href = 'dashboard';
     } else {
         exam = examService.get();
+        studentID = window.sessionStorage.getItem('student');
     }
 
     $scope.exam = exam;
@@ -43,6 +45,17 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
             });
     }
 
+    function submitChoices(choices, examName, studentID) {
+      $http.post('php/submitExam', {choices:choices, exam:examName, student:studentID})
+        .then(function(response){
+          if (response.data.success) {
+            window.location.href = 'dashboard';
+          } else {
+            alert(response.data.message, 'Please try the submission again later!');
+          }
+        })
+    }
+
     // Track the choices that the student has chosen
     var chooses = [];
 
@@ -73,5 +86,9 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
 
     $scope.numberChosen = function() {
         return chooses.length;
+    }
+
+    $scope.submit = function() {
+      submitChoices(chooses, exam.name, studentID);
     }
 });

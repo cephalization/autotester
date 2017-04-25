@@ -20,6 +20,7 @@ mainApp.controller("dashboardCtrl", function($scope, $http, $cookies, examServic
             console.log('retrieveStudent:', response);
             if (response.data.success && response.data.student != null) {
                 $scope.student = response.data.student;
+                window.sessionStorage.setItem('student', $scope.student.student_id);
                 $scope.loadingStudent = false;
                 loadExamResults($scope.student.student_id);
             } else {
