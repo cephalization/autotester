@@ -99,6 +99,7 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
                 }
             }
         }
+        console.log(cleanedChoices);
         submitChoices(cleanedChoices, exam.name, studentID);
     }
 });

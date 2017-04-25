@@ -33,6 +33,7 @@ function signOut() {
         var d = new Date();
         d = d.toUTCString();
         document.cookie = "username=;expires="+d+";path=/;";
+        window.sessionStorage.clear();
         window.location.href = 'index';
     });
 }
