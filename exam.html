@@ -36,11 +36,11 @@
       </div>
       <div ng-if="!loadingQuestions && !loadingAnswers && taken">
         <div class="well" ng-repeat="question in questions">
-          <p class="lead">{{question.number}} - {{question.text}}</p>
+          <p class="lead">{{question.number}} - {{question.text}} <label class="label label-default">{{pointsReceived(question.number) + '/' + question.points}}</label></p>
           <div class="list-group">
             <button type="button" class="list-group-item"
-              ng-repeat="choice in question.choices" disabled
-              ng-class="{'item-success':correct(choice), 'item-danger':!correct(choice)}">
+              ng-repeat="choice in question.choices" ng-disabled="true"
+              ng-class="{'list-group-item-success':(correct(choice, question.number - 1)==1), 'list-group-item-danger':(correct(choice, question.number - 1)==-1)}">
               {{choice.identifier}} : {{choice.text}}
             </button>
           </div>

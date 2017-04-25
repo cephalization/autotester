@@ -41,11 +41,11 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
                       }
                     }
                     console.log('retrieveQuestions:', $scope.questions);
-                    $scope.loadingQuestions = false;
                 } else {
                     alert(response.data.message);
                     window.location.href = 'dashboard';
                 }
+                $scope.loadingQuestions = false;
             });
     }
 
@@ -57,14 +57,14 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
             if (response.data.taken) {
               chosenAnswers = response.data.results.slice();
               $scope.taken = true;
-              $scope.loadingAnswers = false;
             }
           } else {
             alert(response.data.message);
           }
+          $scope.loadingAnswers = false;
         })
     }
-    $scope.correct = function(choice) {
+    $scope.correct = function(choice, questionIndex) {
       // Check if the answer was chosen by the user
       let chosen = 0;
       for (var i = 0; i < chosenAnswers.length; i++) {
@@ -77,7 +77,7 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
       // If the answer is incorrect and chosen by the user return -1
       if (chosen) {
         for (var i = 0; i < $scope.questions.length; i++) {
-          if ($scope.questions[i].correct_choice == choice.identifier) {
+          if ($scope.questions[questionIndex].correct_choice == choice.identifier) {
             return chosen;
           }
         }
@@ -86,6 +86,15 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
 
       // If the answer is not chosen by the user return 0
       return chosen;
+    }
+
+    $scope.pointsReceived = function(number) {
+        for (var i = 0, len = chosenAnswers.length; i < len; i++) {
+            if (number == chosenAnswers[i].Questions_number) {
+                return chosenAnswers[i].pointsRec;
+            }
+        }
+        return '?';
     }
 
     function submitChoices(choices, examName, studentID) {

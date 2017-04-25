@@ -9,12 +9,12 @@ if (isset($post['name']) && isset($post['ID'])) {
     if ($connected) {
 
         // Retrieve all choices for each question chosen by the student
-        $query = $connection->PrepareStatement('Select Choices_identifier, Questions_number, pointsRec from Chooses where Exam_name = ? and Student_student_id = ?');
+        $query = $connection->PrepareStatement('Select Choices_identifier, Questions_number, pointsRec from Chooses where Questions_Exam_name = ? and Student_student_id = ?');
         $query->bindParam(1, $post['name']);
         $query->bindParam(2, $post['ID']);
         $query->execute();
         $query->setFetchMode(PDO::FETCH_ASSOC);
-        $results->choices = $query->fetchAll();
+        $results = $query->fetchAll();
 
         if (count($results)) {
           $response->results = $results;
