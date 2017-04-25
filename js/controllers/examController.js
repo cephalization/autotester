@@ -89,6 +89,16 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
     }
 
     $scope.submit = function() {
-      submitChoices(chooses, exam.name, studentID);
+
+        // Convert the string values of questions_number to int
+        var cleanedChoices = [];
+        for (var i = 0, len = chooses.length; i < len; i++) {
+            for (var j = 0, len = chooses.length; j < len; j++) {
+                if (chooses[j].Questions_number - 1 == i) {
+                    cleanedChoices.push(chooses[j].identifier);
+                }
+            }
+        }
+        submitChoices(cleanedChoices, exam.name, studentID);
     }
 });

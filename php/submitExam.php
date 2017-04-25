@@ -12,10 +12,11 @@ if (isset($post['choices']) && isset($post['student']) && isset($post['exam'])) 
         $connection->beginTransaction();
 
         // Iterate through all choices made by the user
-        foreach ($post['choices'] as $key => $value) {
+        for ($i = 0; $i < count($post['choices']); $i++) {
+          $number = $i + 1;
           $query = $connection->PrepareStatement('insert into Chooses value(?, ?, ?, ?, 0)');
-          $query->bindParam(1, $value->identifier);
-          $query->bindParam(2, $value->Questions_number);
+          $query->bindParam(1, $post['choices'][$i]);
+          $query->bindParam(2, $number);
           $query->bindParam(3, $post['exam']);
           $query->bindParam(4, $post['student']);
           $query->execute();

@@ -48,5 +48,13 @@ class dbConnection {
     $stmt = $this->conn->prepare("$query");
     return $stmt;
   }
+
+  public function beginTransaction() {
+    $this->conn->beginTransaction();
+  }
+
+  public function commit() {
+    $this->conn->commit();
+  }
 }
  ?>
