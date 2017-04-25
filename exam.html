@@ -21,7 +21,7 @@
   <body ng-app="mainApp" ng-controller="examCtrl">
     <div ng-include="'templates/navbar.html'"></div>
     <div class="container">
-      <div ng-if="!loadingQuestions">
+      <div ng-if="!loadingQuestions && !loadingAnswers && !taken">
         <div class="well" ng-repeat="question in questions">
           <p class="lead">{{question.number}} - {{question.text}}</p>
           <div class="list-group">
@@ -34,8 +34,19 @@
         </div>
         <button type="button" name="submitAnswers" class="btn btn-success" ng-disabled="questions.length != numberChosen()" ng-click="submit()">Submit exam</button>
       </div>
-
-      <div ng-if="loadingQuestions">
+      <div ng-if="!loadingQuestions && !loadingAnswers && taken">
+        <div class="well" ng-repeat="question in questions">
+          <p class="lead">{{question.number}} - {{question.text}}</p>
+          <div class="list-group">
+            <button type="button" class="list-group-item"
+              ng-repeat="choice in question.choices" disabled
+              ng-class="{'item-success':correct(choice), 'item-danger':!correct(choice)}">
+              {{choice.identifier}} : {{choice.text}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div ng-if="loadingQuestions || loadingAnswers">
         <h2>Loading Questions...</h2>
       </div>
     </div>

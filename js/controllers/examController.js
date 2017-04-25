@@ -10,7 +10,11 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
 
     $scope.exam = exam;
     $scope.loadingQuestions = true;
+    $scope.loadingAnswers = true;
+    $scope.taken = false;
+    var chosenAnswers = [];
     retrieveQuestions(exam.name);
+    retrieveTakenChoices(exam.name, studentID);
 
     function retrieveQuestions(name) {
         $http.post('php/examQuestions', {name:name})
@@ -43,6 +47,45 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
                     window.location.href = 'dashboard';
                 }
             });
+    }
+
+    function retrieveTakenChoices(name, studentID) {
+      $http.post('php/takenQuestions', {name:name,ID:studentID})
+        .then(function(response){
+          console.log('takenQuestions:', response);
+          if (response.data.success) {
+            if (response.data.taken) {
+              chosenAnswers = response.data.results.slice();
+              $scope.taken = true;
+              $scope.loadingAnswers = false;
+            }
+          } else {
+            alert(response.data.message);
+          }
+        })
+    }
+    $scope.correct = function(choice) {
+      // Check if the answer was chosen by the user
+      let chosen = 0;
+      for (var i = 0; i < chosenAnswers.length; i++) {
+        if (choice.identifier == chosenAnswers[i].Choices_identifier && choice.Questions_number == chosenAnswers[i].Questions_number) {
+            chosen = 1;
+        }
+      }
+
+      // If the answer is correct and chosen by the user return 1
+      // If the answer is incorrect and chosen by the user return -1
+      if (chosen) {
+        for (var i = 0; i < $scope.questions.length; i++) {
+          if ($scope.questions[i].correct_choice == choice.identifier) {
+            return chosen;
+          }
+        }
+        return -1;
+      }
+
+      // If the answer is not chosen by the user return 0
+      return chosen;
     }
 
     function submitChoices(choices, examName, studentID) {
