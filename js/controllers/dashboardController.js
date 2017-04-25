@@ -41,11 +41,10 @@ mainApp.controller("dashboardCtrl", function($scope, $http, $cookies, examServic
                   for (var i = 0; i < response.data.results.length; i++) {
 
                     var total = 0;
-                    for (var i = 0; i < $scope.exams.length; i++) {
-                        if ($scope.exams[i].name === response.data.results[i].Exam_name) {
-                            total = $scope.exams[i].points;
+                    for (var j = 0; j < $scope.exams.length; j++) {
+                        if ($scope.exams[j].name === response.data.results[i].Exam_name) {
+                            total = $scope.exams[j].points;
                             total = parseFloat(total);
-                            break;
                         }
                     }
                     Object.defineProperty($scope.examResults, response.data.results[i].Exam_name,{
