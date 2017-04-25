@@ -23,13 +23,16 @@
     <div class="container">
       <div ng-if="!loadingQuestions">
         <div class="well" ng-repeat="question in questions">
-          <p class="lead">{{question.text}}</p>
+          <p class="lead">{{question.number}} - {{question.text}}</p>
           <div class="list-group">
-            <button type="button" class="list-group-item" ng-repeat="choice in question.choices">
+            <button type="button" class="list-group-item"
+              ng-repeat="choice in question.choices" ng-click="addChoice(choice)" ng-disabled="choosing"
+              ng-class="{'active':chosen(choice)}">
               {{choice.identifier}} : {{choice.text}}
             </button>
           </div>
         </div>
+        <button type="button" name="submitAnswers" class="btn btn-success">Submit exam</button>
       </div>
 
       <div ng-if="loadingQuestions">

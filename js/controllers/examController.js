@@ -42,4 +42,26 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
                 }
             });
     }
+
+    // Track the choices that the student has chosen
+    var chooses = [];
+
+    $scope.choosing = false;
+    $scope.addChoice = function(choice) {
+      $scope.choosing = true;
+      // Check to see if the user has already chosen for this question
+      for (var i = 0; i < chooses.length; i++) {
+        if (chooses[i].Questions_number == choice.Questions_number) {
+          chooses.splice(i, 1);
+        }
+      }
+
+      // Add choice to array
+      chooses.push(choice);
+      $scope.choosing = false;
+    }
+
+    $scope.chosen = function(choice) {
+      return chooses.contains(choice);
+    }
 });
