@@ -45,7 +45,7 @@
                           <h5>{{examResults[exam.name]}}%</h5>
                       </div>
                       <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 test-panel-right test-panel-take" ng-if="!getResults(exam.name)">
-                          <button type="button" name="takeExam" class="btn btn-primary btn-block" onclick="takeExam(exam)">Take</button>
+                          <button type="button" name="takeExam" class="btn btn-primary btn-block" ng-click="takeExam(exam)">Take</button>
                       </div>
                     </div>
                   </div>
