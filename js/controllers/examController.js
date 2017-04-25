@@ -59,9 +59,19 @@ mainApp.controller("examCtrl", function($scope, $http, $cookies, examService){
       // Add choice to array
       chooses.push(choice);
       $scope.choosing = false;
+      console.log('user has chosen', chooses);
     }
 
     $scope.chosen = function(choice) {
-      return chooses.contains(choice);
+        for (var i = 0, len = chooses.length; i < len; i++) {
+            if (chooses[i] == choice) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    $scope.numberChosen = function() {
+        return chooses.length;
     }
 });

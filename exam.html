@@ -32,7 +32,7 @@
             </button>
           </div>
         </div>
-        <button type="button" name="submitAnswers" class="btn btn-success">Submit exam</button>
+        <button type="button" name="submitAnswers" class="btn btn-success" ng-disabled="questions.length != numberChosen()">Submit exam</button>
       </div>
 
       <div ng-if="loadingQuestions">
