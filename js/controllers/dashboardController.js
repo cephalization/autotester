@@ -69,4 +69,9 @@ mainApp.controller("dashboardCtrl", function($scope, $http, $cookies){
     $scope.didPass = function(score) {
         return score >= 70;
     }
+
+    $scope.takeExam = function(exam) {
+      examService.set(exam);
+      window.location.href='exam';
+    }
 });

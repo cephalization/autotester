@@ -15,6 +15,7 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-cookies.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/controllers/dashboardController.js"></script>
+    <script type="text/javascript" src="js/services/examService.js"></script>
     <script src="https://apis.google.com/js/platform.js" onload="appStart()"></script>
   </head>
   <body ng-app="mainApp" ng-controller="dashboardCtrl">
@@ -44,7 +45,7 @@
                           <h5>{{examResults[exam.name]}}%</h5>
                       </div>
                       <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 test-panel-right test-panel-take" ng-if="!getResults(exam.name)">
-                          <button type="button" name="takeExam" class="btn btn-primary btn-block">Take</button>
+                          <button type="button" name="takeExam" class="btn btn-primary btn-block" onclick="takeExam(exam)">Take</button>
                       </div>
                     </div>
                   </div>
