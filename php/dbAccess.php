@@ -7,9 +7,9 @@ class dbConnection {
   private static $conn;
 
   public function __construct() {
-    $this->servername = 'classdb.it.mtu.edu';
-    $this->username = 'adpowell';
-    $this->password = 'P@ssw0rd';
+    $this->servername = '';
+    $this->username = '';
+    $this->password = '';
     $this->dbname = 'adpowell';
     $this->conn = null;
   }
